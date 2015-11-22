@@ -1,14 +1,14 @@
 {
-  "name": "aw\\Object",
+  "name": "aw/object",
   "description": "Non dynamic base Object class",
   "version": "0.0.1",
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "": "aw/"
+      "aw\\": "aw/"
     },
     "psr-0": {
-      "": "aw/"
+      "aw\\": "aw/"
     }
   }
 }
