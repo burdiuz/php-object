@@ -5,7 +5,7 @@ namespace aw {
             $value = null;
             $getter = self::getAccessorName($name);
             if (method_exists($this, $getter)) {
-                $this->$getter($name);
+                $value = $this->$getter($name);
             } else {
                 throw new \Exception('Property accessor "' . $name . '" not found.');
             }
