@@ -1,8 +1,14 @@
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
+
+# IDEA files
 .idea/
 *.iml
+
+# Composer files
+vendor/
+composer.lock
 
 # Folder config file
 Desktop.ini
