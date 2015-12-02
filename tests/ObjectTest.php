@@ -1,5 +1,7 @@
 <?php
 namespace aw{
+    use \PHPUnit_Framework_TestCase as TestCase;
+
     class MyObject extends Object {
         public $_property = null;
         public function getProperty(){
@@ -10,7 +12,8 @@ namespace aw{
         }
     }
 
-    class ObjectTest extends \PHPUnit_Framework_TestCase{
+    class ObjectTest extends TestCase{
+
         /**
          * @test
          */
@@ -21,6 +24,7 @@ namespace aw{
             $obj->_property = (object)true;
             $this->assertEquals($obj->_property, $obj->property);
         }
+
         /**
          * @test
          * @expectedException Exception
@@ -29,6 +33,7 @@ namespace aw{
             $obj = new MyObject();
             $obj->notAProperty;
         }
+
         /**
          * @test
          */
@@ -40,6 +45,7 @@ namespace aw{
             $this->assertEquals('to be string', $obj->_property);
 
         }
+
         /**
          * @test
          * @expectedException Exception
@@ -49,6 +55,26 @@ namespace aw{
             $obj->anyProperty = true;
 
         }
+
+        /**
+         * @test
+         */
+        public function testIsset(){
+            $obj = new MyObject();
+            $this->assertTrue(isset($obj->property));
+            $this->assertFalse(isset($obj->anotherProperty));
+        }
+
+        /**
+         * @test
+         */
+        public function testUnset(){
+            $obj = new MyObject();
+            $obj->_property = 1;
+            unset($obj->property);
+            $this->assertNull($obj->property);
+        }
+
         /**
          * @test
          */
