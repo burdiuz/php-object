@@ -13,12 +13,14 @@ namespace aw{
     }
 
     class ObjectTest extends TestCase{
+        public $obj;
 
-        /**
-         * @test
-         */
+        public function setUp(){
+            $this->obj = new MyObject();
+        }
+
         public function testAccessor(){
-            $obj = new MyObject();
+            $obj = $this->obj;
             $obj->_property = 1;
             $this->assertEquals($obj->_property, $obj->property);
             $obj->_property = (object)true;
@@ -30,15 +32,12 @@ namespace aw{
          * @expectedException Exception
          */
         public function testMissingAccessor(){
-            $obj = new MyObject();
+            $obj = $this->obj;
             $obj->notAProperty;
         }
 
-        /**
-         * @test
-         */
         public function testMutator(){
-            $obj = new MyObject();
+            $obj = $this->obj;
             $obj->property = 1;
             $this->assertEquals(1, $obj->_property);
             $obj->property = 'to be string';
@@ -47,46 +46,34 @@ namespace aw{
         }
 
         /**
-         * @test
          * @expectedException Exception
          */
         public function testMissingMutator(){
-            $obj = new MyObject();
+            $obj = $this->obj;
             $obj->anyProperty = true;
 
         }
 
-        /**
-         * @test
-         */
         public function testIsset(){
-            $obj = new MyObject();
+            $obj = $this->obj;
             $this->assertTrue(isset($obj->property));
             $this->assertFalse(isset($obj->anotherProperty));
         }
 
-        /**
-         * @test
-         */
         public function testUnset(){
-            $obj = new MyObject();
+            $obj = $this->obj;
             $obj->_property = 1;
             unset($obj->property);
             $this->assertNull($obj->property);
         }
 
-        /**
-         * @test
-         */
         public function testGetAccessorName(){
             $this->assertEquals('getA', Object::getAccessorName('a'), 'make uppercase');
             $this->assertEquals('getA', Object::getAccessorName('A'), 'keep uppercase');
             $this->assertEquals('getABCD', Object::getAccessorName('ABCD'), 'keep uppercase');
             $this->assertEquals('getAbcd', Object::getAccessorName('abcd'), 'make uppercase only first letter');
         }
-        /**
-         * @test
-         */
+
         public function testGetMutatorName(){
             $this->assertEquals('setA', Object::getMutatorName('a'), 'make uppercase');
             $this->assertEquals('setA', Object::getMutatorName('A'), 'keep uppercase');
