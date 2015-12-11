@@ -3,7 +3,7 @@ namespace aw {
 
   use \PHPUnit_Framework_TestCase as TestCase;
 
-  class MyObject extends Object {
+  class _ObjectGetSetTest_Object extends Object {
     public $_property = null;
 
     public function getProperty() {
@@ -15,11 +15,11 @@ namespace aw {
     }
   }
 
-  class ObjectTest extends TestCase {
+  class ObjectGetSetTest extends TestCase {
     public $obj;
 
     public function setUp() {
-      $this->obj = new MyObject();
+      $this->obj = new _ObjectGetSetTest_Object();
     }
 
     public function testAccessor() {

@@ -25,7 +25,8 @@ namespace aw {
     }
 
     public function __isset(string $name) {
-      return method_exists($this, self::getAccessorName($name));
+      $checker = self::getCheckerName($name);
+      return method_exists($this, $checker) ? $this->$checker() : method_exists($this, self::getAccessorName($name));
     }
 
     /**
@@ -34,11 +35,16 @@ namespace aw {
      * @throws \Exception
      */
     public function __unset(string $name) {
-      $setter = self::getMutatorName($name);
-      if (method_exists($this, $setter)) {
-        $this->$setter(null);
-      } else {
-        throw new Exception('Property mutator "' . $name . '" not found.');
+      $remover = self::getRemoverName($name);
+      if (method_exists($this, $remover)) {
+        $this->$remover();
+      }else{
+        $setter = self::getMutatorName($name);
+        if (method_exists($this, $setter)) {
+          $this->$setter(null);
+        } else {
+          throw new Exception('Property mutator "' . $name . '" not found.');
+        }
       }
     }
 
@@ -48,6 +54,14 @@ namespace aw {
 
     static public function getMutatorName($name) {
       return $name ? 'set' . strtoupper($name[0]) . substr($name, 1) : null;
+    }
+
+    static public function getCheckerName($name) {
+      return $name ? 'has' . strtoupper($name[0]) . substr($name, 1) : null;
+    }
+
+    static public function getRemoverName($name) {
+      return $name ? 'remove' . strtoupper($name[0]) . substr($name, 1) : null;
     }
   }
 }

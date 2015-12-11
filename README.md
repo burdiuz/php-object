@@ -26,8 +26,35 @@ echo $instance->property.PHP_EOL; // GET-SET-something
 echo $instance->getData().PHP_EOL; // DATA:hidden value
 echo $instance->anyProperty.PHP_EOL; // throws error Property accessor "anyProperty" not found.
 ```
-  
-*Note:* You cannot unset/delete property, unset() just tries to pass NULL into property mutator method. Even if its changed to NULL, isset() for property will still return TRUE:
+You can change behaviour of your property when `isset`/`unset` are used.
+```php
+class StringProperty extends \aw\Object {
+    private $_property = '';
+    public function getProperty():string {
+        return $this->_property;
+    }
+    public function setProperty(string $value) {
+        $this->_property = $value;
+    }
+    protected function hasProperty():bool {
+        return !$this->_property;
+    }
+    protected function removeProperty() {
+        $this->_property = '';
+    }
+}
+```
+Then check if your property is empty or set it to be empty:
+```php
+$prop = new StringProperty();
+echo json_encode(isset($prop->property)); // false
+$prop->property = 'value';
+echo json_encode(isset($prop->property)); // true
+unset($prop->property);
+echo json_encode($prop->property); // "" -- will output empty string in JSON format
+echo json_encode(isset($prop->property)); // false
+```
+*Note:* Defining `has*` and `remove*` methods is optional, but without them you will not bw able to define logic for isset and unset actions over your property.  Without them unset/delete property via `unset()` just tries to pass `null` into property mutator method and even if property set to `null`, `isset()` will always return `true`:
 ```php
 class MySimpleObject extends \aw\Object {
     private $_property = null;
