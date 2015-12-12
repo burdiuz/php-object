@@ -1,5 +1,12 @@
 ## PHP-Object
-Non dynamic base object class for PHP. Allows making getters and setters via getProperty and setProperty methods with public/protected accessor. Not defined properties will throw error.
+Non dynamic base object class for PHP. Allows making getters and setters via `get*` and `set*` methods with public/protected accessor. Not defined properties will throw error.
+Basically instead of shared magic methods `__set`, `__get`, `__isset`, `__unset` you can define individual methods for each property:
+* get* - get[Property name from upper-case char], for reading property value.
+* set* - set[Property name from upper-case char], for setting property new value.
+* has* - has[Property name from upper-case char], for checking is property set.
+* remove* - remove[Property name from upper-case char], for removing(using `unset()` on it) property.
+`has*` and `remove*` methods have default action and are optional. By default, `has*` will always return `true` for properties with defined getter and `remove*` will try to pass `null` into setter.
+
 ```php
 class MyObject extends \aw\Object {
     private $_property = null;
@@ -17,16 +24,17 @@ class MyObject extends \aw\Object {
     }
 }
 ```
-Instances of MyObject will be non-dynamic objects with one property "property" that can be accessed via "$instance->property"
+Instances of `MyObject` will be non-dynamic objects with one read-write property `property` that can be accessed via `$instance->property` and two read-only properties -- `hiddenProperty` and its alias `data`.
 ```php
 $instance = new MyObject();
 echo $instance->property.PHP_EOL; // GET-
 $instance->property = 'something';
 echo $instance->property.PHP_EOL; // GET-SET-something
 echo $instance->getData().PHP_EOL; // DATA:hidden value
+echo $instance->data.PHP_EOL; // DATA:hidden value
 echo $instance->anyProperty.PHP_EOL; // throws error Property accessor "anyProperty" not found.
 ```
-You can change behaviour of your property when `isset`/`unset` are used.
+You can change behaviour of your property when `isset`/`unset` are used via `has*` and `remove*` methods.
 ```php
 class StringProperty extends \aw\Object {
     private $_property = '';
@@ -54,7 +62,7 @@ unset($prop->property);
 echo json_encode($prop->property).PHP_EOL; // "" -- will output empty string in JSON format
 echo json_encode(isset($prop->property)).PHP_EOL; // false
 ```
-*Note:* Defining `has*` and `remove*` methods is optional, but without them you will not bw able to define logic for isset and unset actions over your property.  Without them unset/delete property via `unset()` just tries to pass `null` into property mutator method and even if property set to `null`, `isset()` will always return `true`:
+*Note:* Defining `has*` and `remove*` methods is optional, but without them you will not bw able to define logic for `isset()` and `unset()` actions over your property.  Without them unset/delete property via `unset()` just tries to pass `null` into property mutator method and even if property set to `null`, `isset()` will always return `true`:
 ```php
 class MySimpleObject extends \aw\Object {
     private $_property = null;
