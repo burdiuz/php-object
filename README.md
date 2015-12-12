@@ -37,7 +37,7 @@ class StringProperty extends \aw\Object {
         $this->_property = $value;
     }
     protected function hasProperty():bool {
-        return !$this->_property;
+        return (bool)$this->_property;
     }
     protected function removeProperty() {
         $this->_property = '';
@@ -47,12 +47,12 @@ class StringProperty extends \aw\Object {
 Then check if your property is empty or set it to be empty:
 ```php
 $prop = new StringProperty();
-echo json_encode(isset($prop->property)); // false
+echo json_encode(isset($prop->property)).PHP_EOL; // false
 $prop->property = 'value';
-echo json_encode(isset($prop->property)); // true
+echo json_encode(isset($prop->property)).PHP_EOL; // true
 unset($prop->property);
-echo json_encode($prop->property); // "" -- will output empty string in JSON format
-echo json_encode(isset($prop->property)); // false
+echo json_encode($prop->property).PHP_EOL; // "" -- will output empty string in JSON format
+echo json_encode(isset($prop->property)).PHP_EOL; // false
 ```
 *Note:* Defining `has*` and `remove*` methods is optional, but without them you will not bw able to define logic for isset and unset actions over your property.  Without them unset/delete property via `unset()` just tries to pass `null` into property mutator method and even if property set to `null`, `isset()` will always return `true`:
 ```php

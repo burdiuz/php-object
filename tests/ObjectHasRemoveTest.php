@@ -9,7 +9,7 @@ namespace aw {
   use \PHPUnit_Framework_TestCase as TestCase;
 
   class _ObjectHasRemoveTest_Object extends Object {
-    public $_property = null;
+    public $_property = '';
 
     public function getProperty() {
       return $this->_property;
@@ -20,21 +20,30 @@ namespace aw {
     }
 
     public function hasProperty() {
-      return !$this->_property;
+      return (bool)$this->_property;
     }
 
     public function removeProperty() {
-      return $this->_property = null;
+      return $this->_property = '';
     }
   }
 
-  class OObjectHasRemoveTest {
-    public function testHasProperty() {
+  class ObjectHasRemoveTest extends TestCase {
+    public $target;
+    public function setUp(){
+      $this->target = new _ObjectHasRemoveTest_Object();
+    }
 
+    public function testHasProperty() {
+      $this->assertFalse(isset($this->target->property));
+      $this->target->property = 'value';
+      $this->assertTrue(isset($this->target->property));
     }
 
     public function testRemoveProperty() {
-
+      $this->target->property = 'value';
+      unset($this->target->property);
+      $this->assertFalse(isset($this->target->property));
     }
   }
 }
