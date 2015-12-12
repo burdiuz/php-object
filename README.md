@@ -63,7 +63,7 @@ unset($prop->property);
 echo json_encode($prop->property).PHP_EOL; // "" -- will output empty string in JSON format
 echo json_encode(isset($prop->property)).PHP_EOL; // false
 ```
-*Note:* Defining `has*` and `remove*` methods is optional, but without them you will not bw able to define logic for `isset()` and `unset()` actions over your property.  Without them unset/delete property via `unset()` just tries to pass `null` into property mutator method and even if property set to `null`, `isset()` will always return `true`:
+*Note:* Defining `has*` and `remove*` methods is optional, but without them you will not be able to define logic for `isset()` and `unset()` actions over your property.  Without them unset/delete property via `unset()` just tries to pass `null` into property mutator method and even if property set to `null`, `isset()` will always return `true`:
 ```php
 class MySimpleObject extends \aw\Object {
     private $_property = null;
