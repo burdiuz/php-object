@@ -4,7 +4,8 @@ Basically instead of shared magic methods `__set`, `__get`, `__isset`, `__unset`
 * get* - get[Property name from upper-case char], for reading property value.
 * set* - set[Property name from upper-case char], for setting property new value.
 * has* - has[Property name from upper-case char], for checking is property set.
-* remove* - remove[Property name from upper-case char], for removing(using `unset()` on it) property.
+* remove* - remove[Property name from upper-case char], for removing(using `unset()` on it) property.  
+
 `has*` and `remove*` methods have default action and are optional. By default, `has*` will always return `true` for properties with defined getter and `remove*` will try to pass `null` into setter.
 
 ```php
