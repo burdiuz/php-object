@@ -1,11 +1,11 @@
 language: php
 php:
   - '7.0'
-  
+
 install:
  - composer install
  - composer require satooshi/php-coveralls
- 
+
  script:
   - mkdir -p reports
   - php vendor/bin/phpunit -c phpunit.xml
