@@ -1,4 +1,7 @@
 ## PHP-Object
+[![Build Status](https://travis-ci.org/burdiuz/php-object.svg?branch=master)](https://travis-ci.org/burdiuz/php-object)
+[![Coverage Status](https://coveralls.io/repos/burdiuz/php-object/badge.svg?branch=master&service=github)](https://coveralls.io/github/burdiuz/php-object?branch=master)
+
 Non dynamic base object class for PHP. Allows making getters and setters via `get*` and `set*` methods with public/protected accessor. Not defined properties will throw error.
 Basically instead of shared magic methods `__set`, `__get`, `__isset`, `__unset` you can define individual methods for each property:
 * get* - get[Property name from upper-case char], for reading property value.
