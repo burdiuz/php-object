@@ -1,5 +1,5 @@
 {
-  "name": "aw/object",
+  "name": "actualwave/object",
   "description": "Non dynamic base Object class with getters/setters implementation",
   "keywords": ["object", "class", "extend", "getter", "setter", "accessor", "mutator"],
   "homepage": "https://github.com/burdiuz/php-object",
