@@ -1,8 +1,22 @@
 {
   "name": "aw/object",
-  "description": "Non dynamic base Object class",
-  "version": "0.0.4",
+  "description": "Non dynamic base Object class with getters/setters implementation",
+  "keywords": ["object", "class", "extend", "getter", "setter", "accessor", "mutator"],
+  "homepage": "https://github.com/burdiuz/php-object",
+  "version": "0.0.5",
   "license": "MIT",
+  "authors": [
+    {
+      "name": "Oleg Galaburda",
+      "email": "burdiuz@gmail.com",
+      "homepage": "http://actualwave.com",
+      "role": "Developer"
+    }
+  ],
+  "type": "library",
+  "require": {
+    "php": ">=7.0.0"
+  },
   "require-dev": {
     "phpunit/phpunit": "5.1.*"
   },
@@ -12,6 +26,17 @@
     },
     "psr-0": {
       "aw\\": "aw/"
+    }
+  }
+}
+
+{
+  "name": "monolog/monolog",
+  "description": "Logging for PHP 5.3",
+  "license": "MIT",
+  "autoload": {
+    "psr-0": {
+      "Monolog": "src"
     }
   }
 }

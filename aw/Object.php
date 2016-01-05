@@ -4,9 +4,9 @@ namespace aw {
   use \Exception;
 
   class Object {
-    public function __get(string $name) {
+    final public function __get(string $name) {
       $value = null;
-      $getter = self::getAccessorName($name);
+      $getter = static::getAccessorName($name);
       if (method_exists($this, $getter)) {
         $value = $this->$getter($name);
       } else {
@@ -15,8 +15,8 @@ namespace aw {
       return $value;
     }
 
-    public function __set(string $name, $value) {
-      $setter = self::getMutatorName($name);
+    final public function __set(string $name, $value) {
+      $setter = static::getMutatorName($name);
       if (method_exists($this, $setter)) {
         $this->$setter($value);
       } else {
@@ -24,9 +24,9 @@ namespace aw {
       }
     }
 
-    public function __isset(string $name) {
-      $checker = self::getCheckerName($name);
-      return method_exists($this, $checker) ? $this->$checker() : method_exists($this, self::getAccessorName($name));
+    final public function __isset(string $name) {
+      $checker = static::getCheckerName($name);
+      return method_exists($this, $checker) ? $this->$checker() : method_exists($this, static::getAccessorName($name));
     }
 
     /**
@@ -34,12 +34,12 @@ namespace aw {
      * @param string $name
      * @throws \Exception
      */
-    public function __unset(string $name) {
-      $remover = self::getRemoverName($name);
+    final public function __unset(string $name) {
+      $remover = static::getRemoverName($name);
       if (method_exists($this, $remover)) {
         $this->$remover();
       }else{
-        $setter = self::getMutatorName($name);
+        $setter = static::getMutatorName($name);
         if (method_exists($this, $setter)) {
           $this->$setter(null);
         } else {
