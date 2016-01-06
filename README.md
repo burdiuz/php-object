@@ -2,6 +2,7 @@
 [![Build Status](https://travis-ci.org/burdiuz/php-object.svg?branch=master)](https://travis-ci.org/burdiuz/php-object)
 [![Coverage Status](https://coveralls.io/repos/burdiuz/php-object/badge.svg?branch=master&service=github)](https://coveralls.io/github/burdiuz/php-object?branch=master)
 [![Dependency Status](https://www.versioneye.com/user/projects/568a56eceb4f47003c001007/badge.svg?style=flat)](https://www.versioneye.com/user/projects/568a56eceb4f47003c001007)
+[![Latest Stable Version](https://poser.pugx.org/actualwave/object/v/stable)](https://packagist.org/packages/actualwave/object) [![Total Downloads](https://poser.pugx.org/actualwave/object/downloads)](https://packagist.org/packages/actualwave/object) [![License](https://poser.pugx.org/actualwave/object/license)](https://packagist.org/packages/actualwave/object)
 
 Non dynamic base object class for PHP. Allows making getters and setters via `get*` and `set*` methods with public/protected accessor. Not defined properties will throw error.
 
