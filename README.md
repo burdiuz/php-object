@@ -4,6 +4,14 @@
 [![Dependency Status](https://www.versioneye.com/user/projects/568a56eceb4f47003c001007/badge.svg?style=flat)](https://www.versioneye.com/user/projects/568a56eceb4f47003c001007)
 
 Non dynamic base object class for PHP. Allows making getters and setters via `get*` and `set*` methods with public/protected accessor. Not defined properties will throw error.
+
+### Installation
+Via [composer](https://getcomposer.org/)
+```
+composer require actualwave/object
+```
+
+### Usage
 Basically instead of shared magic methods `__set`, `__get`, `__isset`, `__unset` you can define individual methods for each property:
 * get* - get[Property name from upper-case char], for reading property value.
 * set* - set[Property name from upper-case char], for setting property new value.
